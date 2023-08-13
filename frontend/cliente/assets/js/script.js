@@ -42,6 +42,20 @@ function ready() {
         var button = addCart[i];
         button.addEventListener('click', addCartClicked);
     }
+
+    //Botón de compra
+    document.getElementsByClassName('btn-buy')[0]
+    .addEventListener('click', buyBottonClicked);
+}
+
+// Boton de compra
+function buyBottonClicked(){
+    alert('Compra realizada con exito!');
+    var cartContent = document.getElementsByClassName('cart-content')[0];
+    while(cartContent.hasChildNodes()){
+        cartContent.removeChild(cartContent.firstChild);
+    }
+    updatetotal();
 }
 
 function removeCartItem(event){
@@ -65,7 +79,7 @@ function addCartClicked(event){
     var shopProducts = button.parentElement;
     var title = shopProducts.getElementsByClassName('product-title')[0].innerText;
     var price = shopProducts.getElementsByClassName('price')[0].innerText;
-    var productImg = shopProducts.getElementsByClassName('product-img').src;
+    var productImg = shopProducts.getElementsByClassName('product-img').src; //[0] cuando tenga las imagenes renderizadas
     addProductToCart(title, price, productImg);
     updatetotal();
 }
@@ -115,8 +129,8 @@ function updatetotal() {
         var price = parseFloat(priceElement.innerText.replace("L ", ""));
         var quantity = quantityElement.value;
         total = total + (price * quantity);
-        // Si el precio contiene centavos
-        total = Math.round(total * 100)/100;
-        document.getElementsByClassName('total-price')[0].innerText = "L " + total;
     }
+    // Si el precio contiene centavos
+    total = Math.round(total * 100)/100;
+    document.getElementsByClassName('total-price')[0].innerText = "L " + total;
 }
